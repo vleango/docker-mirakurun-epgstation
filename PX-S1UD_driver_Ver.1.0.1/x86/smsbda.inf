@@ -1,0 +1,557 @@
+; Installation inf for the Siano Mobile Silicon Devices
+;
+; Copyright (C) Siano Mobile Silicon, 2004 - 2007  All Rights Reserved.
+;
+
+[Version]
+signature="$Windows NT$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Sms%
+DriverVer=03/06/2011,4.3.5.0
+CatalogFile=smsbda.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%Sms%=Siano,NTx86,NTamd64
+
+[Siano]
+%smsbda.name%=smsbda8.1,USB\VID_187F&PID_0810,USB\VID_187F&PID_0800
+%smsbda.name%=smsbda6.8,USB\VID_187F&PID_0680&MI_01
+%smsbda.name%=smsbda6,USB\VID_187F&PID_0600,USB\VID_187F&PID_0601,USB\VID_3275&PID_0080
+%smsbda.name%=smsbda5,USB\VID_187F&PID_0500
+%smsbda.name%=smsbda3.3,USB\VID_187F&PID_0310
+%smsbda.name%=smsbda3.2,USB\VID_187F&PID_0302
+%smsbda.name%=smsbda3.1,USB\VID_187F&PID_0301
+%smsbda.name%=smsbda3,USB\VID_187F&PID_0300
+%smsbda.name%=smsbda2.2,USB\VID_187F&PID_0281&MI_01
+%smsbda.name%=smsbda2.1,USB\VID_187F&PID_0201,USB\VID_187F&PID_0202
+
+[Siano.NTx86]
+%smsbda.name%=smsbda8.1,USB\VID_187F&PID_0810,USB\VID_187F&PID_0800
+%smsbda.name%=smsbda6.8,USB\VID_187F&PID_0680&MI_01
+%smsbda.name%=smsbda6,USB\VID_187F&PID_0600,USB\VID_187F&PID_0601,USB\VID_3275&PID_0080
+%smsbda.name%=smsbda5,USB\VID_187F&PID_0500
+%smsbda.name%=smsbda3.3,USB\VID_187F&PID_0310
+%smsbda.name%=smsbda3.2,USB\VID_187F&PID_0302
+%smsbda.name%=smsbda3.1,USB\VID_187F&PID_0301
+%smsbda.name%=smsbda3,USB\VID_187F&PID_0300
+%smsbda.name%=smsbda2.2,USB\VID_187F&PID_0281&MI_01
+%smsbda.name%=smsbda2.1,USB\VID_187F&PID_0201,USB\VID_187F&PID_0202
+
+[Siano.NTamd64]
+%smsbda.name%=smsbda8.1,USB\VID_187F&PID_0810,USB\VID_187F&PID_0800
+%smsbda.name%=smsbda6.8,USB\VID_187F&PID_0680&MI_01
+%smsbda.name%=smsbda6,USB\VID_187F&PID_0600,USB\VID_187F&PID_0601,USB\VID_3275&PID_0080
+%smsbda.name%=smsbda5,USB\VID_187F&PID_0500
+%smsbda.name%=smsbda3.3,USB\VID_187F&PID_0310
+%smsbda.name%=smsbda3.2,USB\VID_187F&PID_0302
+%smsbda.name%=smsbda3.1,USB\VID_187F&PID_0301
+%smsbda.name%=smsbda3,USB\VID_187F&PID_0300
+%smsbda.name%=smsbda2.2,USB\VID_187F&PID_0281&MI_01
+%smsbda.name%=smsbda2.1,USB\VID_187F&PID_0201,USB\VID_187F&PID_0202
+
+;--------------------------------
+; Siano Nova Device
+;--------------------------------
+[smsbda2.1.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda2.1.NT.HW]
+AddReg=smsbda2.1.addreg
+
+[smsbda2.1.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile0",,"\systemroot\system32\drivers\dvb_nova_12mhz_b0.inp"
+HKR,,"ImageFile1",,"\systemroot\system32\drivers\dvb_nova_12mhz_b0.inp"
+HKR,,"ImageFile2",,"\systemroot\system32\drivers\tdmb_nova_12mhz_b0.inp"
+HKR,,"ImageFile4",,"\systemroot\system32\drivers\dvb_nova_12mhz_b0.inp"
+HKR,,"ImageFile5",,"\systemroot\system32\drivers\isdbt_nova_12mhz_b0.inp"
+HKR,,"ImageFile6",,"\systemroot\system32\drivers\isdbt_nova_12mhz_b0.inp"
+HKR,,"ImageFile8",,""
+HKR,,"ImageFile9",,"\systemroot\system32\drivers\fm_radio.inp"
+HKR,,"ImageFile10",,"\systemroot\system32\drivers\fm_radio.inp"
+HKR,,"Mode",0x00010001,4
+HKR,,"NdisIpSink",0x00010001,1
+
+[smsbda2.1.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_TVTUNER%, %smsfmtuner.guid%, smsfmtuner,0
+AddInterface = %KSCATEGORY_CAPTURE%, %smsfmcapture.guid%, smsfmcapture
+AddInterface = %KSCATEGORY_TVAUDIO%, %smsfmtvaudio.guid%, smsfmtvaudio
+AddInterface = %KSCATEGORY_CROSSBAR%, %smsfmxbar.guid%, smsfmxbar
+
+[smsbda2.1.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Nova Device with UMS
+;--------------------------------
+[smsbda2.2.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda2.2.NT.HW]
+AddReg=smsbda2.2.addreg
+
+[smsbda2.2.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile0",,"\systemroot\system32\drivers\dvb_nova_12mhz_ums_b0.inp"
+HKR,,"ImageFile1",,"\systemroot\system32\drivers\dvb_nova_12mhz_b0.inp"
+HKR,,"ImageFile2",,"\systemroot\system32\drivers\tdmb_nova_12mhz_b0.inp"
+HKR,,"ImageFile4",,"\systemroot\system32\drivers\dvb_nova_12mhz_ums_b0.inp"
+HKR,,"ImageFile5",,"\systemroot\system32\drivers\isdbt_nova_12mhz_ums_b0.inp"
+HKR,,"ImageFile6",,"\systemroot\system32\drivers\isdbt_nova_12mhz_ums_b0.inp"
+HKR,,"ImageFile8",,""
+HKR,,"ImageFile9",,"\systemroot\system32\drivers\fm_radio_ums.inp"
+HKR,,"ImageFile10",,"\systemroot\system32\drivers\fm_radio_ums.inp"
+HKR,,"Mode",0x00010001,4
+HKR,,"NdisIpSink",0x00010001,1
+
+[smsbda2.2.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_TVTUNER%, %smsfmtuner.guid%, smsfmtuner,0
+AddInterface = %KSCATEGORY_CAPTURE%, %smsfmcapture.guid%, smsfmcapture
+AddInterface = %KSCATEGORY_TVAUDIO%, %smsfmtvaudio.guid%, smsfmtvaudio
+AddInterface = %KSCATEGORY_CROSSBAR%, %smsfmxbar.guid%, smsfmxbar
+
+[smsbda2.2.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Vega Device
+;--------------------------------
+[smsbda3.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda3.NT.HW]
+AddReg=smsbda3.addreg
+
+[smsbda3.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile7",,"\systemroot\system32\drivers\cmmb_vega_12mhz.inp"
+HKR,,"Mode",0x00010001,7
+
+[smsbda3.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+
+[smsbda3.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Venice Device
+;--------------------------------
+[smsbda3.1.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda3.1.NT.HW]
+AddReg=smsbda3.1.addreg
+
+[smsbda3.1.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile7",,"\systemroot\system32\drivers\cmmb_venice_12mhz.inp"
+HKR,,"Mode",0x00010001,7
+
+[smsbda3.1.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+
+[smsbda3.1.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Venice A1 device
+;--------------------------------
+[smsbda3.2.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda3.2.NT.HW]
+AddReg=smsbda3.2.addreg
+
+[smsbda3.2.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile7",,"\systemroot\system32\drivers\cmmb_venice_12mhz.inp"
+HKR,,"Mode",0x00010001,7
+
+[smsbda3.2.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+
+[smsbda3.2.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Ming Device
+;--------------------------------
+[smsbda3.3.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda3.3.NT.HW]
+AddReg=smsbda3.3.addreg
+
+[smsbda3.3.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile7",,"\systemroot\system32\drivers\cmmb_ming_app.inp"
+HKR,,"Mode",0x00010001,7
+
+[smsbda3.3.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+
+[smsbda3.3.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Pele Device
+;--------------------------------
+[smsbda5.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda5.NT.HW]
+AddReg=smsbda5.addreg
+
+[smsbda5.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile5",,"\systemroot\system32\drivers\isdbt_pele.inp"
+HKR,,"ImageFile6",,"\systemroot\system32\drivers\isdbt_pele.inp"
+HKR,,"Mode",0x00010001,5
+
+[smsbda5.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+
+[smsbda5.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Rio Device
+;--------------------------------
+[smsbda6.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda6.NT.HW]
+AddReg=smsbda6.addreg
+
+[smsbda6.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile0",,"\systemroot\system32\drivers\dvb_rio.inp"
+HKR,,"ImageFile1",,"\systemroot\system32\drivers\dvbh_rio.inp"
+HKR,,"ImageFile2",,"\systemroot\system32\drivers\tdmb_rio.inp"
+HKR,,"ImageFile4",,"\systemroot\system32\drivers\dvb_rio.inp"
+HKR,,"ImageFile5",,"\systemroot\system32\drivers\isdbt_rio.inp"
+HKR,,"ImageFile6",,"\systemroot\system32\drivers\isdbt_rio.inp"
+HKR,,"ImageFile8",,""
+HKR,,"ImageFile9",,"\systemroot\system32\drivers\fm_radio_rio.inp"
+HKR,,"ImageFile10",,"\systemroot\system32\drivers\fm_radio_rio.inp"
+HKR,,"Mode",0x00010001,6
+HKR,,"NdisIpSink",0x00010001,1
+
+[smsbda6.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_TVTUNER%, %smsfmtuner.guid%, smsfmtuner,0
+AddInterface = %KSCATEGORY_CAPTURE%, %smsfmcapture.guid%, smsfmcapture
+AddInterface = %KSCATEGORY_TVAUDIO%, %smsfmtvaudio.guid%, smsfmtvaudio
+AddInterface = %KSCATEGORY_CROSSBAR%, %smsfmxbar.guid%, smsfmxbar
+
+[smsbda6.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Rio Device
+;--------------------------------
+[smsbda6.8.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda6.8.NT.HW]
+AddReg=smsbda6.8.addreg
+
+[smsbda6.8.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile0",,"\systemroot\system32\drivers\dvb_rio_ums.inp"
+HKR,,"ImageFile1",,"\systemroot\system32\drivers\dvbh_rio_ums.inp"
+HKR,,"ImageFile2",,"\systemroot\system32\drivers\tdmb_rio_ums.inp"
+HKR,,"ImageFile4",,"\systemroot\system32\drivers\dvb_rio_ums.inp"
+HKR,,"ImageFile5",,"\systemroot\system32\drivers\isdbt_rio_ums.inp"
+HKR,,"ImageFile6",,"\systemroot\system32\drivers\isdbt_rio_ums.inp"
+HKR,,"ImageFile8",,""
+HKR,,"ImageFile9",,"\systemroot\system32\drivers\fm_radio_rio_ums.inp"
+HKR,,"ImageFile10",,"\systemroot\system32\drivers\fm_radio_rio_ums.inp"
+HKR,,"Mode",0x00010001,6
+HKR,,"NdisIpSink",0x00010001,1
+
+[smsbda6.8.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_TVTUNER%, %smsfmtuner.guid%, smsfmtuner,0
+AddInterface = %KSCATEGORY_CAPTURE%, %smsfmcapture.guid%, smsfmcapture
+AddInterface = %KSCATEGORY_TVAUDIO%, %smsfmtvaudio.guid%, smsfmtvaudio
+AddInterface = %KSCATEGORY_CROSSBAR%, %smsfmxbar.guid%, smsfmxbar
+
+[smsbda6.8.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+;--------------------------------
+; Siano Denver Device
+;--------------------------------
+[smsbda8.1.NT]
+Include=ks.inf,kscaptur.inf,bda.inf
+Needs=KS.Registration.NT,KSCAPTUR.Registration.NT,BDA.Installation.NT
+CopyFiles=smsbda.files,smsprops.files
+AddReg=smsprops.addreg
+
+[smsbda8.1.NT.HW]
+AddReg=smsbda8.1.addreg
+
+[smsbda8.1.addreg]
+HKR,,"Cfg",0x00010001,2
+HKR,,"ImageFile11",,"\systemroot\system32\drivers\atsc_denver.inp"
+HKR,,"Mode",0x00010001,11
+HKR,,"NdisIpSink",0x00010001,1
+
+[smsbda8.1.NT.Interfaces]
+AddInterface = %KSCATEGORY_BDATUNER%, %smsprimarytuner.guid%, smsprimarytuner
+AddInterface = %KSCATEGORY_BDATUNER%, %smssecondarytuner.guid%, smssecondarytuner
+AddInterface = %KSCATEGORY_BDARECEIVER%, %smsbdacapture.guid%, smsbdacapture
+AddInterface = %KSCATEGORY_CAPTURE%, %smscapture.guid%, smscapture
+AddInterface = %KSCATEGORY_VIDEO%, %smscapture.guid%, smscapture
+
+[smsbda8.1.NT.Services]
+AddService=smsbda, 0x00000002, smsbda.ServiceInstall
+
+
+;--------------------------------
+; Common
+;--------------------------------
+
+[smsprops.addreg]
+HKR,,EnumPropPages32,,"smsprops.dll,SmsPropPageProvider"
+
+[smsbda.files]
+smsbda.sys
+isdbt_rio.inp
+smsbda.cfg
+
+[smsprops.files]
+smsprops.dll
+
+[DestinationDirs]
+smsbda.files=10,system32\drivers
+smsprops.files=11
+
+[SourceDisksFiles]
+smsbda.sys = 123
+smsprops.dll = 123
+isdbt_rio.inp = 123
+smsbda.cfg = 123
+
+
+[SourceDisksNames.x86]
+123=%Disk_Description%,,,\i386
+
+[SourceDisksNames.amd64]
+123=%Disk_Description%,,,\amd64
+
+[smsprimarytuner]
+AddReg = smsprimarytuner.AddReg
+
+[smsprimarytuner.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%smsprimarytuner.name%
+
+[smssecondarytuner]
+AddReg = smssecondarytuner.AddReg
+
+[smssecondarytuner.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%smssecondarytuner.name%
+
+[smsbdacapture]
+AddReg = smsbdacapture.AddReg
+
+[smsbdacapture.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%smsbdacapture.name%
+
+[smscapture]
+AddReg = smscapture.AddReg
+
+[smscapture.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%smscapture.name%
+
+[smsfmtuner]
+AddReg = smsfmtuner.AddReg, PinNames.AddReg
+
+[smsfmtuner.AddReg]
+HKR,,CLSID,,%KSTvTune.CLSID%
+HKR,,FriendlyName,,%smsfmtuner.name%
+
+[smsfmcapture]
+AddReg = smsfmcapture.AddReg
+
+[smsfmcapture.Addreg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%smsfmcapture.name%
+
+[smsfmtvaudio]
+AddReg = smsfmtvaudio.AddReg
+
+[smsfmtvaudio.Addreg]
+HKR,,CLSID,,%KSTVAudio.CLSID%
+HKR,,FriendlyName,,%smsfmtvaudio.name%
+
+[smsfmxbar]
+AddReg = smsfmxbar.AddReg
+
+[smsfmxbar.Addreg]
+HKR,,CLSID,,%KSXBar.CLSID%
+HKR,,FriendlyName,,%smsfmxbar.name%
+
+[smsbda.ServiceInstall]
+DisplayName=%smsbda.name%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\smsbda.sys
+LoadOrderGroup=ExtendedBase
+
+[PinNames.AddReg]
+HKLM,%MediaCategories%\%GUID.PINNAME_AnalogAudioOut%,Name,,%Pin.AnalogAudioOut%
+HKLM,%MediaCategories%\%GUID.PINNAME_AudioTunerIn%,Name,,%Pin.AudioTunerIn%
+HKLM,%MediaCategories%\%GUID.PINNAME_AudioPCMOut%,Name,,%Pin.AudioPCMOUT%
+HKLM,%MediaCategories%\%GUID.PINNAME_TVAudioIn%,Name,,%Pin.TVAudioIn%
+HKLM,%MediaCategories%\%GUID.PINNAME_TVAudioOut%,Name,,%Pin.TVAudioOut%
+HKLM,%MediaCategories%\%GUID.PINNAME_AudioXBarOut%,Name,,%Pin.AudioXBarOut%
+HKLM,%MediaCategories%\%GUID.PINNAME_AnalogVideoOut%,Name,,%Pin.AnalogVideoOut%
+HKLM,%MediaCategories%\%GUID.PINNAME_VideoXBarOut%,Name,,%Pin.VideoXBarOut%
+HKLM,%MediaCategories%\%GUID.PINNAME_VideoDecOut%,Name,,%Pin.VideoDecOut%
+
+[Strings]
+
+;----------------
+; non-localizeable
+;----------------
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSTvTune.CLSID="{266EEE40-6C63-11cf-8A03-00AA006ECB65}"
+KSTVAudio.CLSID="{71F96462-78F3-11d0-A18C-00A0C9118956}"
+KSXBar.CLSID="{71F96460-78F3-11d0-A18C-00A0C9118956}"
+
+KSCATEGORY_BDARECEIVER="{FD0A5AF4-B41D-11d2-9C95-00C04F7971E0}"
+KSCATEGORY_BDATUNER="{71985F48-1CA1-11d3-9CC8-00C04F7971E0}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_VIDEO="{6994AD05-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_TVTUNER="{a799a800-a46d-11d0-a18c-00a02401dcd4}"
+KSCATEGORY_TVAUDIO="{a799a802-a46d-11d0-a18c-00a02401dcd4}"
+KSCATEGORY_CROSSBAR="{a799a801-a46d-11d0-a18c-00a02401dcd4}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+
+smsprimarytuner.guid="{76594675-42D1-46df-8478-6D38B6F6E5F1}"
+smssecondarytuner.guid="{76594676-42D1-46df-8478-6D38B6F6E5F1}"
+smsbdacapture.guid="{15D16EC1-E0A8-4de2-ABE3-55C86EE92EA7}"
+smscapture.guid="{15D16EC2-E0A8-4de2-ABE3-55C86EE92EA7}"
+smsfmtuner.guid="{C62B13F3-3569-411d-ABD2-C2B9E980EC61}"
+smsfmcapture.guid="{7FD3D6C3-CC21-4c42-9418-60BA63F20DCE}"
+smsfmtvaudio.guid="{37973BD8-3344-4f28-8C03-6076698CD827}"
+smsfmxbar.guid="{486FC848-21B8-4842-A11B-B0CD0E344ED8}"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+GUID.PINNAME_AnalogAudioOut="{8DD4233B-D6BB-42a0-90BD-AEEB69B1CB8E}"
+GUID.PINNAME_AudioTunerIn="{E3A10475-430B-4a8d-BFF1-A64E33DC97F0}"
+GUID.PINNAME_AudioPCMOut="{5295C9EE-50F2-45c3-9C71-2ED32D988726}"
+GUID.PINNAME_TVAudioIn="{4453B675-B555-47fe-93FD-0A17CADF39E2}"
+GUID.PINNAME_TVAudioOut="{2968BED6-0980-448c-8ACF-9AAC12C471E1}"
+GUID.PINNAME_AudioXBarOut="{C5F96D64-BD55-4313-81F8-72AD143DD7C2}"
+GUID.PINNAME_AnalogVideoOut="{F5CC48E6-B10E-4ea3-8055-EF1BDFAC95C2}"
+GUID.PINNAME_VideoXBarOut="{F9EDBD1E-1FBE-4551-9729-78B93312D9DA}"
+GUID.PINNAME_VideoDecOut="{7FF51A3E-FB84-4079-871B-8EB9EC633D12}"
+;----------------
+; localizeable
+;----------------
+
+Pin.AnalogAudioOut="Analog Audio Out"
+Pin.AudioTunerIn="Audio Tuner In"
+Pin.AudioPCMOUT="Audio PCM Out"
+Pin.TVAudioIn="TV Audio In"
+Pin.TVAudioOut="TV Audio Out"
+Pin.AudioXBarOut="Audio XBar Out"
+Pin.AnalogVideoOut="Analog Video Out"
+Pin.VideoXBarOut="Video XBar Out"
+Pin.VideoDecOut="Video Dec Out"
+
+Sms="PLEX Digital TV Tuner"
+smsbda.name="PX-S1UD Digital TV Tuner"
+smsrom.name="PX-S1UD Digital TV Tuner (ROM)"
+smsprimarytuner.name="PX-S1UD Digital TV Secondary Tuner Filter"
+smssecondarytuner.name="PX-S1UD Digital TV Secondary Tuner Filter"
+smsbdacapture.name="Bda Capture Filter"
+smscapture.name="TS Capture Filter"
+smsfmtuner.name="Sms Fm Tuner Filter"
+smsfmcapture.name="Sms Fm Capture"
+smsfmtvaudio.name="Sms Fm TV Audio"
+smsfmxbar.name="Sms Fm XBar"
+Disk_Description="PLEX Digital TV Installation Disk"

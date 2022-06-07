@@ -7,7 +7,7 @@ services:
     ports:
       - 4551:4551
     env_file:
-      - ./config/.tunnel.development.env
+      - ./epgstation/config/.tunnel.development.env
     depends_on:
       - epgstation
   mirakurun:
