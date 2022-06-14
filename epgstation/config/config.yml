@@ -30,6 +30,8 @@ recordedFileExtension: .m2ts
 recorded:
   - name: recorded
     path: "%ROOT%/recorded"
+  - name: encoded
+    path: "%ROOT%/encoded"
 
 thumbnail: "%ROOT%/thumbnail"
 thumbnailSize: 480x270
