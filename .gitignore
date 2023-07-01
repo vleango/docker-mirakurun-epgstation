@@ -1,3 +1,7 @@
+encoded/*
+recorded/*
+log.txt
+
 *.swp
 *.log
 *.log.*

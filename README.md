@@ -42,4 +42,4 @@ docker-compose up -d
 ```
 curl -X PUT "http://localhost:40772/api/config/channels/scan?minCh=10&maxCh=30&refresh=true"
 ```
-
+- docker-compose will automatically add those channels. Just be patient
