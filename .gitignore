@@ -1,6 +1,7 @@
 encoded/*
 recorded/*
 log.txt
+status.txt
 
 *.swp
 *.log

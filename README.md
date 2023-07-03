@@ -38,8 +38,19 @@ sudo reboot
 docker-compose up -d
 ```
 
-7 Scan for channels
+7. Scan for channels
 ```
 curl -X PUT "http://localhost:40772/api/config/channels/scan?minCh=10&maxCh=30&refresh=true"
 ```
 - docker-compose will automatically add those channels. Just be patient
+
+8. Restart
+```
+curl -X PUT "http://localhost:40772/api/restart"
+```
+
+9. Status
+```
+curl "http://localhost:40772/api/status" >> status.txt
+```
+
